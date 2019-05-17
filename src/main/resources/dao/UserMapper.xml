@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kv.mqdemo.dao.UserMapper">
+    <resultMap id="BaseResultMap" type="com.kv.mqdemo.entity.User">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="age" jdbcType="INTEGER" property="age" />
+        <!--<result column="version" jdbcType="INTEGER" property="version" />-->
+        <!--<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />-->
+        <!--<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />-->
+    </resultMap>
+    <select id="queryUser" resultMap="BaseResultMap">
+        select * from user where id=#{id};
+    </select>
+</mapper>
