@@ -1,13 +1,8 @@
 package com.kv.mqdemo.rabbitmq.producer;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.kv.mqdemo.entity.User;
 import com.kv.mqdemo.rabbitmq.MQConstants;
 import com.kv.mqdemo.service.UserService;
-import com.mklinfo.mq.RabbitProducer;
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.Correlation;
-import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +19,20 @@ public class MQProducer {
     @Autowired
     UserService userService;
 
+    /**
+     * 发送字符串
+     * @param message
+     */
     public void sendStringMessage(String message){
         System.out.println("Sender object: " + message);
         CorrelationData correlationId = new CorrelationData(UUID.randomUUID().toString());
         rabbitTemplate.convertAndSend(MQConstants.EXCHANGE, MQConstants.ROUTING_KEY, message,correlationId);
     }
 
+    /**
+     * 发送user对象，User类需要序列化
+     * @param id
+     */
     public void sendObjectMessage(Integer id) {
         System.out.println("Sender object: " + id);
         CorrelationData correlationId = new CorrelationData(UUID.randomUUID().toString());
@@ -37,9 +40,4 @@ public class MQProducer {
         rabbitTemplate.convertAndSend(MQConstants.EXCHANGE, MQConstants.ROUTING_KEY1, user,correlationId);
     }
 
-    public void sendIntegerMessage(Integer id) {
-        System.out.println("Sender object: " + id);
-        CorrelationData correlationId = new CorrelationData(UUID.randomUUID().toString());
-        rabbitTemplate.convertAndSend(MQConstants.EXCHANGE, MQConstants.ROUTING_KEY2, id,correlationId);
-    }
 }
