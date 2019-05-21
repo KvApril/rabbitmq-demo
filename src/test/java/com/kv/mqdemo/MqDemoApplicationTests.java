@@ -1,7 +1,5 @@
 package com.kv.mqdemo;
 
-//import com.kv.mqdemo.rabbitmq.consumer.ACKNeedMQConsumer;
-//import com.kv.mqdemo.rabbitmq.producer.ACKNeedMQProducer;
 import com.kv.mqdemo.rabbitmq.producer.ACKMQProducer;
 import com.kv.mqdemo.rabbitmq.producer.MQProducer;
 import com.kv.mqdemo.rabbitmq.producer.BusinessMQProducer;
